@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="simul_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="glbl" />
+            <top_module name="simul" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="180065167000fs"></ZoomStartTime>
+      <ZoomEndTime time="180097667001fs"></ZoomEndTime>
+      <Cursor1Time time="180080167000fs"></Cursor1Time>
+   </zoom_setting>
+   <WVObjectSize size="10" />
+   <wvobject type="logic" fp_name="/simul/UUT/map_tx/userclk2">
+      <obj_property name="ElementShortName">userclk2</obj_property>
+      <obj_property name="ObjectShortName">userclk2</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/simul/UUT/map_tx/gmii_txd">
+      <obj_property name="ElementShortName">gmii_txd[7:0]</obj_property>
+      <obj_property name="ObjectShortName">gmii_txd[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/simul/UUT/map_tx/gmii_tx_en">
+      <obj_property name="ElementShortName">gmii_tx_en</obj_property>
+      <obj_property name="ObjectShortName">gmii_tx_en</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/simul/UUT/map_tx/gmii_txd_int">
+      <obj_property name="ElementShortName">gmii_txd_int[7:0]</obj_property>
+      <obj_property name="ObjectShortName">gmii_txd_int[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/simul/UUT/map_tx/crc32">
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="ElementShortName">crc32[31:0]</obj_property>
+      <obj_property name="ObjectShortName">crc32[31:0]</obj_property>
+      <obj_property name="label">crc32_tx</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/simul/UUT/map_rx/crc32">
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="ElementShortName">crc32[31:0]</obj_property>
+      <obj_property name="ObjectShortName">crc32[31:0]</obj_property>
+      <obj_property name="label">crc32_rx</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/simul/UUT/map_rx/gmii_rxd_int">
+      <obj_property name="ElementShortName">gmii_rxd_int[7:0]</obj_property>
+      <obj_property name="ObjectShortName">gmii_rxd_int[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/simul/UUT/map_rx/gmii_rx_dv_int">
+      <obj_property name="ElementShortName">gmii_rx_dv_int</obj_property>
+      <obj_property name="ObjectShortName">gmii_rx_dv_int</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/simul/UUT/map_rx/crc32_calculated">
+      <obj_property name="ElementShortName">crc32_calculated[31:0]</obj_property>
+      <obj_property name="ObjectShortName">crc32_calculated[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/simul/UUT/map_rx/state">
+      <obj_property name="ElementShortName">state</obj_property>
+      <obj_property name="ObjectShortName">state</obj_property>
+   </wvobject>
+</wave_config>
