@@ -95,7 +95,7 @@ begin
     ip_source34 <= null_16 & ip_src(15 downto 0);
     ip_dest12 <= null_16 & ip_dest(31 downto 16);
     ip_dest34 <= null_16 & ip_dest(15 downto 0);
-    ip_checksum01 <= x"0000C53F" + ip_source12 + ip_source34 + ip_dest12 + ip_dest34;
+    ip_checksum01 <= x"0000F2D3" + ip_source12 + ip_source34 + ip_dest12 + ip_dest34 + (null_16 & ip_length);
     ip_checksum02 <= null_16 & ((ip_checksum01(31 downto 16)) + (ip_checksum01(15 downto 0)));
     ip_checksum <= not (ip_checksum02);
     
@@ -170,6 +170,15 @@ begin
                 elsif byte_counter = 6 then
                     gmii_txd_int <= ip_length(7 downto 0);
                     byte_counter := byte_counter - 1;
+                elsif byte_counter = 5 then
+                    gmii_txd_int <= x"ed";
+                    byte_counter := byte_counter - 1;
+                elsif byte_counter = 4 then
+                    gmii_txd_int <= x"c1";
+                    byte_counter := byte_counter - 1;
+                elsif byte_counter = 3 then
+                    gmii_txd_int <= x"40";
+                    byte_counter := byte_counter - 1;
 		        elsif byte_counter = 1 then
                     gmii_txd_int <= x"80";
                     byte_counter := byte_counter - 1;
@@ -208,6 +217,9 @@ begin
             when UDP_Header =>
                 if (byte_counter = 7) or (byte_counter = 5) then
                     gmii_txd_int <= x"04";
+                    byte_counter := byte_counter - 1;
+                elsif byte_counter = 4 then
+                    gmii_txd_int <= x"01";
                     byte_counter := byte_counter - 1;
                 elsif byte_counter = 3 then
                     gmii_txd_int <= payload_length(15 downto 8);

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="simul_tx_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="glbl" />
+            <top_module name="simul_tx" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="79040228900000fs"></ZoomStartTime>
+      <ZoomEndTime time="79040293900001fs"></ZoomEndTime>
+      <Cursor1Time time="79040288000000fs"></Cursor1Time>
+   </zoom_setting>
+   <WVObjectSize size="6" />
+   <wvobject type="array" fp_name="/simul_tx/data_int">
+      <obj_property name="ElementShortName">data_int[1023:0]</obj_property>
+      <obj_property name="ObjectShortName">data_int[1023:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/simul_tx/StartSending">
+      <obj_property name="ElementShortName">StartSending</obj_property>
+      <obj_property name="ObjectShortName">StartSending</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/simul_tx/userclk2_int">
+      <obj_property name="ElementShortName">userclk2_int</obj_property>
+      <obj_property name="ObjectShortName">userclk2_int</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/simul_tx/clk125_period">
+      <obj_property name="ElementShortName">clk125_period</obj_property>
+      <obj_property name="ObjectShortName">clk125_period</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/simul_tx/UUT/gmii_txd_int">
+      <obj_property name="ElementShortName">gmii_txd_int[7:0]</obj_property>
+      <obj_property name="ObjectShortName">gmii_txd_int[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/simul_tx/UUT/ip_checksum">
+      <obj_property name="ElementShortName">ip_checksum[31:0]</obj_property>
+      <obj_property name="ObjectShortName">ip_checksum[31:0]</obj_property>
+   </wvobject>
+</wave_config>

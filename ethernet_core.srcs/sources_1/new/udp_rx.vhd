@@ -47,17 +47,17 @@ end udp_rx;
 
 architecture Behavioral of udp_rx is
 
-component ila_1
-PORT (
-    clk : IN STD_LOGIC;
-    probe0 : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
-    probe1 : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
-    probe2 : IN STD_LOGIC_VECTOR(0 DOWNTO 0);
-    probe3 : IN STD_LOGIC_VECTOR(0 DOWNTO 0);
-    probe4 : IN STD_LOGIC_VECTOR(0 DOWNTO 0);
-    probe5 : IN STD_LOGIC_VECTOR(3 DOWNTO 0)
-);
-END component;
+--component ila_1
+--PORT (
+--    clk : IN STD_LOGIC;
+--    probe0 : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
+--    probe1 : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+--    probe2 : IN STD_LOGIC_VECTOR(0 DOWNTO 0);
+--    probe3 : IN STD_LOGIC_VECTOR(0 DOWNTO 0);
+--    probe4 : IN STD_LOGIC_VECTOR(0 DOWNTO 0);
+--    probe5 : IN STD_LOGIC_VECTOR(3 DOWNTO 0)
+--);
+--END component;
 
 component crc32_gen 
   port ( data_in : in std_logic_vector (7 downto 0);
@@ -71,7 +71,7 @@ end component;
     signal gmii_rxd_int    :  std_logic_vector(7 downto 0);
     signal gmii_rx_dv_int  : std_logic;
     signal ifdata_int      : std_logic := '0';
-    signal data_length_int :   std_logic_vector(15 downto 0); -- for the moment fixed 18 - 0x12
+    signal data_length_int :   std_logic_vector(15 downto 0);
     signal data_int        :   std_logic_vector(1023 downto 0); 
         
     type type_state is ( WaitData, Preamble, MAC_Destination, MAC_Source, IP_Header, IP_Check, IP_Source, IP_Destination, UDP_Header, UDP_Data, FrameCheck, FinishedSending, RejectFrame);
@@ -357,16 +357,16 @@ begin
     end if;
 end process;
 
-   RX_ILA : ila_1
-    port map
-    (
-        clk => userclk2,
-        probe0 => data_length_int,
-        probe1 => gmii_rxd_int,
-        probe2(0) => gmii_rx_dv_int,
-        probe3(0) => PackageProcessed,
-        probe4(0) => '0',
-        probe5    => state_vector
-    );
+--   RX_ILA : ila_1
+--    port map
+--    (
+--        clk => userclk2,
+--        probe0 => data_length_int,
+--        probe1 => gmii_rxd_int,
+--        probe2(0) => gmii_rx_dv_int,
+--        probe3(0) => PackageProcessed,
+--        probe4(0) => '0',
+--        probe5    => state_vector
+--    );
 
 end Behavioral;

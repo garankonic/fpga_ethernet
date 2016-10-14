@@ -66,22 +66,22 @@ end main;
 
 architecture Behavioral of main is
 
-component ila_0
-PORT (
-clk : IN STD_LOGIC;
+--component ila_0
+--PORT (
+--clk : IN STD_LOGIC;
 
 
-probe0 : IN STD_LOGIC_VECTOR(0 DOWNTO 0);
-    probe1 : IN STD_LOGIC_VECTOR(0 DOWNTO 0);
-    probe2 : IN STD_LOGIC_VECTOR(0 DOWNTO 0);
-    probe3 : IN STD_LOGIC_VECTOR(0 DOWNTO 0);
-    probe4 : IN STD_LOGIC_VECTOR(0 DOWNTO 0);
-    probe5 : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
-    probe6 : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
-    probe7 : IN STD_LOGIC_VECTOR(15 DOWNTO 0)
+--probe0 : IN STD_LOGIC_VECTOR(0 DOWNTO 0);
+--    probe1 : IN STD_LOGIC_VECTOR(0 DOWNTO 0);
+--    probe2 : IN STD_LOGIC_VECTOR(0 DOWNTO 0);
+--    probe3 : IN STD_LOGIC_VECTOR(0 DOWNTO 0);
+--    probe4 : IN STD_LOGIC_VECTOR(0 DOWNTO 0);
+--    probe5 : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+--    probe6 : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+--    probe7 : IN STD_LOGIC_VECTOR(15 DOWNTO 0)
 
-);
-END component;
+--);
+--END component;
 
 component gig_ethernet_core
       port(
@@ -200,11 +200,11 @@ end component;
   signal ReceivedDataLoc           : std_logic := '0';
   
   -- output data
-  signal tx_data_length            : std_logic_vector(15 downto 0); -- for the moment fixed 18 - 0x12
+  signal tx_data_length            : std_logic_vector(15 downto 0);
   signal tx_data                   : std_logic_vector(1023 downto 0) ;
     -- input data
   shared variable bit_counter      : integer := 0;
-  signal rx_data_length            : std_logic_vector(15 downto 0); -- for the moment fixed 18 - 0x12
+  signal rx_data_length            : std_logic_vector(15 downto 0); 
   signal rx_data                   : std_logic_vector(1023 downto 0) ;
 
 begin
@@ -300,23 +300,6 @@ map_rx: udp_rx port map (
       data_length   => rx_data_length,
       data          => rx_data
       );
-
-   process (userclk2)
-   begin
-      if userclk2'event and userclk2 = '1' then         
-         counter := counter+1;
-               
-         if counter = 125_000_000 then
-         --if counter = 500 then
---            StartSending <= not StartSending;
---            tx_data_length <= x"0012"; -- 18 bytes
---            tx_data <= (others => '0');
---            tx_data(143 downto 0) <= x"01_AA_BB_cc_dd_ee_ff_11_22_33_CC_CC_66_77_88_99_AA_BB";
-            counter := 0;
-         end if; 
-         
-      end if;
-   end process;
    
    process (userclk2)
    begin
@@ -324,40 +307,40 @@ map_rx: udp_rx port map (
             if ReceivedData /= ReceivedDataLoc then
                 ReceivedDataLoc <= ReceivedData;
                 bit_counter := TO_INTEGER(unsigned(rx_data_length))*8-1;
-                -- first 2 bytes define the command
-                case rx_data(bit_counter downto (bit_counter-15)) is
+                -- first 1 byte defines the command
+                case rx_data(bit_counter downto (bit_counter-7)) is
                     -- welcome message
-                    when x"0000" =>
+                    when x"00" =>
                         StartSending <= not StartSending;
-                        tx_data_length <= x"0064"; -- 98+2 bytes
-                        tx_data(799 downto 0) <= x"0000_58696c696e78204b43373035204576616c756174696f6e20426f6172642e204445535920434d5320547261636b657220557067726164652050686173652049492e204469676974616c2044657369676e206279204d796b797461202862657461292e";
+                        tx_data_length <= x"0063"; -- 98+1 bytes
+                        tx_data(791 downto 0) <= x"00_58696c696e78204b43373035204576616c756174696f6e20426f6172642e204445535920434d5320547261636b657220557067726164652050686173652049492e204469676974616c2044657369676e206279204d796b797461202862657461292e";
                     -- 16 bit counter increment
-                    when x"0001" =>
+                    when x"01" =>
                         StartSending <= not StartSending;
-                        tx_data_length <= x"0004"; -- 2+2 bytes
-                        tx_data(31 downto 0) <= x"0001" & (rx_data((bit_counter-8) downto (bit_counter-23))+x"00_01");
+                        tx_data_length <= x"0003"; -- 2+1 bytes
+                        tx_data(23 downto 0) <= x"01" & (rx_data((bit_counter-8) downto (bit_counter-23))+x"00_01");
                     -- command was not recognised
                     when others =>
                         StartSending <= not StartSending;
-                        tx_data_length <= x"0002"; -- 2 bytes
-                        tx_data(15 downto 0) <= x"ffff";
+                        tx_data_length <= x"0001"; -- 1 byte
+                        tx_data(7 downto 0) <= x"ff";
                 end case; 
             end if;
         end if;
    end process;
    
-   U_ILA : ila_0
-    port map
-    (
-        clk => userclk2,
-        probe0(0) => StartSending,
-        probe1(0) => ReceivedData,
-        probe2(0) => gtrefclk_bufg_out,
-        probe3(0) => gmii_tx_en_int,
-        probe4(0) => gmii_rx_dv_int,
-        probe5    => gmii_rxd_int,
-        probe6    => gmii_txd_int,
-        probe7    => rx_data_length
-    );                          
+--   U_ILA : ila_0
+--    port map
+--    (
+--        clk => userclk2,
+--        probe0(0) => StartSending,
+--        probe1(0) => ReceivedData,
+--        probe2(0) => gtrefclk_bufg_out,
+--        probe3(0) => gmii_tx_en_int,
+--        probe4(0) => gmii_rx_dv_int,
+--        probe5    => gmii_rxd_int,
+--        probe6    => gmii_txd_int,
+--        probe7    => rx_data_length
+--    );                          
 
 end Behavioral;

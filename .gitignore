@@ -1,0 +1,6 @@
+ethernet_core.srcs/sources_1/ip/gig_ethernet_core/*
+ethernet_core.srcs/sources_1/ip/ila_0/*
+ethernet_core.srcs/sources_1/ip/ila_1/*
+ethernet_core/*
+*.user
+build-*
