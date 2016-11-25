@@ -10,6 +10,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->buttonGroup->setId(ui->command_0,0);
     ui->buttonGroup->setId(ui->command_1,1);
     ui->buttonGroup->setId(ui->command_2,2);
+    ui->buttonGroup->setId(ui->command_last,10);
     connect(ui->buttonGroup, SIGNAL(buttonClicked(int)), this, SLOT(command_changed(int)));
     ui->command_0->setChecked(true);
     command_changed(0);
@@ -31,14 +32,22 @@ void MainWindow::command_changed(int id)
     if(id == 0) {
         ui->counter_value->setEnabled(false);
         ui->other_command->setEnabled(false);
+        ui->gbt_text->setEnabled(false);
     }
     else if (id == 1) {
         ui->counter_value->setEnabled(true);
         ui->other_command->setEnabled(false);
+        ui->gbt_text->setEnabled(false);
     }
     else if (id == 2) {
         ui->counter_value->setEnabled(false);
+        ui->other_command->setEnabled(false);
+        ui->gbt_text->setEnabled(true);
+    }
+    else if (id == 10) {
+        ui->counter_value->setEnabled(false);
         ui->other_command->setEnabled(true);
+        ui->gbt_text->setEnabled(false);
     }
 }
 
@@ -58,6 +67,7 @@ void MainWindow::readDatagram()
     datagram.resize(socket->pendingDatagramSize());
     QHostAddress *address = new QHostAddress();
     QByteArray command_counter = QByteArray::fromHex(QString("01").toUtf8());
+    QByteArray command_gbt = QByteArray::fromHex(QString("02").toUtf8());
     QByteArray command_undefined = QByteArray::fromHex(QString("ff").toUtf8());
 
     socket->readDatagram(datagram.data(), datagram.size(), address);
@@ -68,6 +78,9 @@ void MainWindow::readDatagram()
         int number = datagram.mid(1).toHex().toInt(&ok,16);
         converted_data = QString("Increased number is: %1").arg(number);
     }
+//    else if (datagram.mid(0,1) == command_gbt) {
+//        for(int i=1; i< datagram.size();i++) converted_data.append(datagram.at(i));
+//    }
     else if (datagram.mid(0,1) == command_undefined) converted_data = "Unknown Command";
     else for(int i=1; i< datagram.size();i++) converted_data.append(datagram.at(i));
 
@@ -100,7 +113,14 @@ void MainWindow::sendDatagram()
         }
             case 2:
         {
+                command_hex = "02";
+                command_hex +=ui->gbt_text->text();
+                break;
+        }
+            case 10:
+        {
                 command_hex = ui->other_command->text();
+                break;
         }
     }
     QByteArray ba1 = QByteArray::fromHex(command_hex.toLatin1());

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>539</width>
-    <height>453</height>
+    <height>491</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -17,13 +17,13 @@
    </size>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <layout class="QVBoxLayout" name="verticalLayout_2">
-    <item>
+   <layout class="QGridLayout" name="gridLayout_2">
+    <item row="0" column="0">
      <widget class="QGroupBox" name="group_send">
       <property name="minimumSize">
        <size>
         <width>501</width>
-        <height>191</height>
+        <height>219</height>
        </size>
       </property>
       <property name="title">
@@ -80,7 +80,58 @@
         </layout>
        </item>
        <item>
-        <widget class="QRadioButton" name="command_2">
+        <layout class="QHBoxLayout" name="horizontalLayout_3">
+         <item>
+          <widget class="QRadioButton" name="command_2">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>Check GBT</string>
+           </property>
+           <attribute name="buttonGroup">
+            <string notr="true">buttonGroup</string>
+           </attribute>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="gbt_text">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="inputMask">
+            <string>HHHHHHHHHHHHHHHHHHHH</string>
+           </property>
+           <property name="text">
+            <string>0123456789ABCDEF0123</string>
+           </property>
+           <property name="maxLength">
+            <number>20</number>
+           </property>
+           <property name="frame">
+            <bool>true</bool>
+           </property>
+           <property name="echoMode">
+            <enum>QLineEdit::Normal</enum>
+           </property>
+           <property name="cursorPosition">
+            <number>20</number>
+           </property>
+           <property name="clearButtonEnabled">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="QRadioButton" name="command_last">
          <property name="minimumSize">
           <size>
            <width>0</width>
@@ -108,7 +159,7 @@
       </layout>
      </widget>
     </item>
-    <item>
+    <item row="1" column="0">
      <layout class="QHBoxLayout" name="horizontalLayout_2">
       <item>
        <spacer name="horizontalSpacer">
@@ -138,7 +189,7 @@
       </item>
      </layout>
     </item>
-    <item>
+    <item row="2" column="0">
      <widget class="QGroupBox" name="group_response">
       <property name="minimumSize">
        <size>
@@ -167,6 +218,9 @@
      </widget>
     </item>
    </layout>
+   <zorder>group_send</zorder>
+   <zorder>group_response</zorder>
+   <zorder>horizontalSpacer</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">

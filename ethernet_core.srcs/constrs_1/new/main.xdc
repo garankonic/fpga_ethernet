@@ -5,10 +5,10 @@
 set_property PACKAGE_PIN G8 [get_ports gtrefclk_p]
 set_property PACKAGE_PIN G7 [get_ports gtrefclk_n]
 # normal clk (200mhz)
-set_property PACKAGE_PIN AD11 [get_ports clk_in_n]
-set_property PACKAGE_PIN AD12 [get_ports clk_in_p]
-set_property IOSTANDARD LVDS [get_ports clk_in_p]
-set_property IOSTANDARD LVDS [get_ports clk_in_n]
+#set_property PACKAGE_PIN AD11 [get_ports clk_in_n]
+#set_property PACKAGE_PIN AD12 [get_ports clk_in_p]
+#set_property IOSTANDARD LVDS [get_ports clk_in_p]
+#set_property IOSTANDARD LVDS [get_ports clk_in_n]
 
 create_clock -period 8.000 -name gtrefclk -add [get_ports gtrefclk_p]
 set_property LOC GTXE2_CHANNEL_X0Y9 [get_cells */*/*/transceiver_inst/gtwizard_inst/*/gtwizard_i/gt0_GTWIZARD_i/gtxe2_i]
@@ -19,8 +19,8 @@ set_property PACKAGE_PIN J3 [get_ports txn]
 create_clock -period 8.000 -name userclk2 -waveform {0.000 4.000} -add [get_nets map_gig/U0/core_clocking_i/userclk2]
 set_property PACKAGE_PIN L20 [get_ports PHY_RESET]
 set_property IOSTANDARD LVCMOS25 [get_ports PHY_RESET]
-set_property PACKAGE_PIN AB7 [get_ports RESET]
-set_property IOSTANDARD LVCMOS15 [get_ports RESET]
+#set_property PACKAGE_PIN AB7 [get_ports RESET]
+#set_property IOSTANDARD LVCMOS15 [get_ports RESET]
 
 # leds
 #set_property PACKAGE_PIN AB8 [get_ports {led_o[0]}]
