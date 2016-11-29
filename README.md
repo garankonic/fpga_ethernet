@@ -17,6 +17,7 @@ This project is the basic Ethernet interface between computer and Xilinx KC705 E
 Open Vivado Design Suite. At the bottom you can find Tcl console.
 - Go to the cloned directory ( cd "directory" )
 - Run Tcl script to create a project ( source ./build.tcl)
+- Ubuntu: to receive and send ethernet packages run `sudo ethtool -K eth0 rx-all on` (with corresponding ethernet interface name)
 
 ### License
 
